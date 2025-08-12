@@ -1,0 +1,47 @@
+Fecha,Hora,Autor,Mensaje
+11/6/2025,8:48 a. m.,SYSTEM,"Los mensajes y las llamadas están cifrados de extremo a extremo. Solo las personas en este chat pueden leerlos, escucharlos o compartirlos. Obtén más información."
+11/6/2025,8:48 a. m.,SYSTEM,"‎Comandante Espe creó el grupo ""Examen comp webs""."
+11/6/2025,8:48 a. m.,SYSTEM,‎Comandante Espe te añadió
+11/6/2025,8:48 a. m.,SYSTEM,"‎Comandante Espe actualizó la duración de los mensajes. Los mensajes nuevos desaparecerán de este chat después de ‎24 horas de haber sido enviados, a menos que se use la opción para conservarlos."
+11/6/2025,8:49 a. m.,SYSTEM,‎Comandante Espe añadió a Maicol Espe (Friki).
+6/8/2025,8:56 a. m.,SYSTEM,‎+593 97 990 2440 desactivó los mensajes temporales.
+6/8/2025,8:57 a. m.,+593 97 990 2440,"Compañeros, buenos días"
+6/8/2025,8:57 a. m.,+593 97 990 2440,Cómo nos organizamos para la actividad de esta materia?
+6/8/2025,9:40 a. m.,<Nathy>,Buenos días compañeros
+6/8/2025,10:12 a. m.,Maicol Espe (Friki),Ya hago el proyecto
+6/8/2025,10:12 a. m.,Maicol Espe (Friki),Déjenme revivir
+6/8/2025,10:54 a. m.,+593 97 990 2440,Listo muchas gracias compañero
+6/8/2025,6:40 p. m.,Comandante Espe,Chicos buenas noches
+6/8/2025,6:40 p. m.,Comandante Espe,Después de las 9 se va a hacer una reunión zoom para grabar el vídeo
+6/8/2025,7:25 p. m.,Maicol Espe (Friki),de una
+6/8/2025,7:25 p. m.,Maicol Espe (Friki),https://github.com/maik151/React-PoryectoContactosApp.giteste
+6/8/2025,7:25 p. m.,Maicol Espe (Friki),este es el link del github
+6/8/2025,7:26 p. m.,Maicol Espe (Friki),algo asi es la interfaz
+6/8/2025,7:26 p. m.,Maicol Espe (Friki),<Multimedia omitido>
+6/8/2025,9:31 p. m.,Comandante Espe,"Sección 1: Servicio de Persistencia (contactService.js) Duración ≈ 2 min Objetivo: explicar cómo simulamos el backend con localStorage. “Abrimos src/services/contactService.js. Ahí definimos cuatro funciones asincrónicas que devuelven promesas y simulan latencia con un delay(200). getContacts(): lee de localStorage bajo la clave myContacts, parsea JSON o devuelve []. createContact(contact): genera un ID con Date.now(), añade el nuevo objeto al array, y reescribe localStorage. updateContact(updatedContact): recorre el array y sustituye el contacto cuyo id coincide con spread operadores para immutabilidad. deleteContact(id): filtra fuera el contacto con ese id y guarda la lista resultante. Con este patrón de servicio desacoplamos la lógica de persistencia del resto de la app, de manera que podríamos sustituirlo por un fetch a una API real simplemente cambiando este módulo.” Sección 2: Componente Raíz y Flujo de Datos (App.jsx) Duración ≈ 2 min Objetivo: mostrar el “cerebro” de la SPA, el orquestador de estado y efectos. “En App.jsx importamos todos los servicios y componentes. Definimos varios useState: allContacts y displayContacts para la lista completa y la filtrada. dark para el modo oscuro. contactToEdit, showDeleteModal, deleteId para editar y borrar. drawerContact y drawerOpen para el side-drawer de detalles. Usamos useEffect(fetchAll, []) para la carga inicial desde el servicio, y useEffect con [dark] para añadir o quitar la clase dark al <body>. También podríamos tener un listener de scroll en un tercer useEffect para la sombra de la navbar. Los handlers CRUD llaman a createContact, updateContact, deleteContact, vuelven a fetchAll(), y disparan notificaciones con toast y confeti con canvas-confetti. El JSX se organiza en: <AppNavbar> con toggle oscuro. Título y botón ExportCSV. <ContactForm> para alta/edición. <SearchBar> + <FilterSort>. <ContactList>. <ConfirmModal> y <SideDrawer> para detalles. <ToastContainer> al final. Esto da un flujo claro: estado → render → efecto → servicio → render de nuevo.” Sección 3: Formulario Controlado (ContactForm.jsx) Duración ≈ 2 min Objetivo: explicar cómo recogemos datos y validamos. “ContactForm.jsx usa useState(initialForm) para un objeto con campos { name, email, phone, address, photo }. Con useEffect rellenamos el formulario si contactToEdit !== null, lo que habilita la edición. Cada input es un controlled component: su value={form[field]} y onChange={handleChange} actualiza el estado con spread operator. Para la foto usamos un <input type=""file""> y FileReader: js Copiar Editar reader.onload = () => setForm(prev => ({ ...prev, photo: reader.result })); Esto convierte la imagen a Data URL para mostrarla sin servidor. En handleSubmit validamos: Nombre y email no vacíos. Email con regex /\S+@\S+\.\S+/. Luego llamamos a onAdd o onUpdate según modo, y limpiamos el formulario. Así tenemos un único componente para alta y edición.” Sección 4: Visualización y Listado (ContactList.jsx & ContactCard.jsx) Duración ≈ 2 min Objetivo: mostrar tarjetas, skeleton loaders y tooltips. “ContactList.jsx mantiene un estado loading con un breve setTimeout para mostrar skeleton loaders (placeholder-glow) antes de pintar los datos. Esto mejora la percepción de carga. Cuando loading es falso, mapeamos contacts.map(c => <ContactCard … />). ContactCard.jsx muestra: Un avatar circular si contact.photo existe, o un placeholder con las iniciales calculadas: js Copiar Editar const initials = contact.name.split(' ').map(n=>n[0]).join('').toUpperCase(); Los datos (nombre, email, teléfono, dirección). Botones Editar y Eliminar con btn-outline-*, sobre los que aplicamos la clase .neon-hover para glow y usamos <OverlayTrigger> y <Tooltip> de React-Bootstrap para accesibilidad. Efectos CSS: Hover en tarjeta (transform: translateY(-4px), box-shadow). Animaciones de entrada con animate__fadeIn, animate__zoomIn. Finalmente, el click en el nombre o en “Editar” abre el SideDrawer con <Offcanvas> para ver todos los detalles y un iframe de Google Maps apuntando a la dirección.” Sección 5: UX/UI Avanzado y Complementos Duración ≈ 2 min Objetivo: repasar estilos globales y microinteracciones. “En index.css definimos: Tipografía global Montserrat cargada desde Google Fonts. Variables CSS para colores primarios/secundarios, acentos y colores de modo oscuro. Estilos .dark para inputs, selects y cards en modo oscuro. .neon-hover: efecto glow en pseudo-elemento ::before, box-shadow para neón según --accent-color. Hover en .card para elevación y transición. Navbar sticky con clase .scrolled que aplica box-shadow al bajar scroll. Además: React-Toastify para notificaciones: jsx Copiar Editar toast.success('Contacto agregado 👍'); <ToastContainer position=""top-right"" autoClose={3000} />; canvas-confetti para celebraciones ligeras: confetti({ particleCount: 100, spread: 70 }); Con estas microinteracciones y estilos, la aplicación deja de ser un CRUD estándar y ofrece una experiencia moderna, coherente y memorable para el usuario.”"
+6/8/2025,9:32 p. m.,Comandante Espe,es una guia
+6/8/2025,9:32 p. m.,Comandante Espe,para la grabacion
+6/8/2025,9:32 p. m.,Comandante Espe,el compañero michael ya va a crear la reunion para explicarnos
+6/8/2025,9:34 p. m.,Maicol Espe (Friki),https://cedia.zoom.us/j/81408466965
+6/8/2025,9:34 p. m.,Maicol Espe (Friki),ahi unanse mushashos
+6/8/2025,9:42 p. m.,Maicol Espe (Friki),https://github.com/maik151/React-PoryectoContactosApp.git
+6/8/2025,10:06 p. m.,Comandante Espe,Se eliminó este mensaje.
+6/8/2025,10:06 p. m.,Comandante Espe,Se eliminó este mensaje.
+6/8/2025,10:06 p. m.,Comandante Espe,Se eliminó este mensaje.
+6/8/2025,10:15 p. m.,Comandante Espe,nombres completos envien por fa
+6/8/2025,10:15 p. m.,Comandante Espe,chicos
+6/8/2025,10:15 p. m.,Comandante Espe,Acosta Loor Maria Belen
+6/8/2025,10:15 p. m.,Alejandro Bravo Espe,Nixon Alejandro Bravo Quijije
+6/8/2025,10:17 p. m.,<Nathy>,Jennifer Nathaly Loor Mecias <Se editó este mensaje.>
+6/8/2025,10:25 p. m.,Maicol Espe (Friki),Michael Steven Jimenez Basante
+6/8/2025,10:27 p. m.,Maicol Espe (Friki),https://drive.google.com/file/d/1FCc-YQWfX7Wfrbc0pr_t_Z1qyO5RlsnQ/view?usp=sharing
+6/8/2025,10:27 p. m.,Maicol Espe (Friki),ese es el linjk del video mushashos
+6/8/2025,10:27 p. m.,Comandante Espe,oki michael <Se editó este mensaje.>
+6/8/2025,10:33 p. m.,+593 97 990 2440,<Multimedia omitido>
+6/8/2025,10:33 p. m.,+593 97 990 2440,"listo compas, subirán pronto, que esto se entrega hasta las 11pm"
+6/8/2025,10:34 p. m.,Comandante Espe,pay
+6/8/2025,10:35 p. m.,Comandante Espe,suban por fa todos
+6/8/2025,10:35 p. m.,Maicol Espe (Friki),ya esta subido
+6/8/2025,10:37 p. m.,+593 97 990 2440,@192062347604209 @163685565726866  subieron?
+6/8/2025,10:38 p. m.,<Nathy>,Siu
+6/8/2025,10:38 p. m.,Alejandro Bravo Espe,Yes muchas gracias
